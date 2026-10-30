@@ -1,0 +1,11 @@
+# File video gốc nặng (182MB) - dùng file nén hero_recap.mp4 (24.5MB) để đưa lên GitHub
+RECAP/x.mp4
+RECAP/x (1).mp4
+
+# File âm thanh WAV chưa nén vượt quá 100MB (GitHub giới hạn cứng 100MB/file)
+MIXTAPE_/*.wav
+
+# Các file tạm / OS
+.DS_Store
+Thumbs.db
+*.tmp

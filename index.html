@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P EIGHT — DJ | NHA TRANG</title>
+  <meta name="description" content="P EIGHT — Open Format DJ từ Nha Trang. House, Hiphop, Trap, Techno, Festival Music." />
+  <meta property="og:title" content="P EIGHT — DJ | NHA TRANG" />
+  <meta property="og:description" content="Open Format DJ từ Nha Trang. House, Hiphop, Trap, Techno, Festival Music." />
+  <meta property="og:image" content="IMAGE_/XH2N0717-2.jpg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET & BASE ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:   #080808;
+      --dark:    #111111;
+      --card:    #181818;
+      --border:  rgba(255,255,255,0.08);
+      --white:   #ffffff;
+      --muted:   #888888;
+      --accent:  #c8a96e;        /* warm gold */
+      --accent2: #e8c87a;
+      --ff-head: 'Bebas Neue', sans-serif;
+      --ff-body: 'Inter', sans-serif;
+      --ff-mono: 'Space Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ───────────────────────────────────────────── */
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform .1s ease;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(200,169,110,0.5);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: transform .25s ease, width .3s ease, height .3s ease, border-color .3s ease;
+    }
+    body:has(a:hover) .cursor-ring,
+    body:has(button:hover) .cursor-ring {
+      width: 60px; height: 60px;
+      border-color: var(--accent);
+    }
+
+    /* ── SCROLLBAR ───────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ── NOISE OVERLAY ───────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9997;
+      opacity: .35;
+    }
+
+    /* ── NAVBAR ──────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      width: 100%;
+      max-width: 100vw;
+      box-sizing: border-box;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 36px;
+      transition: background .4s ease, padding .4s ease;
+    }
+    nav.scrolled {
+      background: rgba(8,8,8,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 16px 36px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 1.5px solid rgba(200,169,110, 0.45);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+      display: block;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+    .nav-logo:hover img {
+      transform: scale(1.08);
+      border-color: var(--accent);
+      box-shadow: 0 4px 18px rgba(200,169,110, 0.35);
+    }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--ff-mono);
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(16, 16, 16, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(200, 169, 110, 0.35);
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      transition: all .3s cubic-bezier(.16, 1, .3, 1);
+      animation: nav-btn-glow 3s ease-in-out infinite alternate;
+      z-index: 102;
+    }
+    @keyframes nav-btn-glow {
+      0%   { border-color: rgba(200, 169, 110, 0.3); box-shadow: 0 4px 14px rgba(0,0,0,0.5); }
+      100% { border-color: rgba(200, 169, 110, 0.7); box-shadow: 0 4px 18px rgba(200, 169, 110, 0.3); }
+    }
+    .nav-hamburger:hover {
+      transform: scale(1.08);
+      border-color: var(--accent);
+      background: rgba(26, 26, 26, 0.9);
+    }
+    .nav-hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all .35s cubic-bezier(.16, 1, .3, 1);
+    }
+    .nav-hamburger span:nth-child(1) { width: 18px; }
+    .nav-hamburger span:nth-child(2) { width: 12px; }
+    .nav-hamburger span:nth-child(3) { width: 18px; }
+    .nav-hamburger:hover span:nth-child(2) { width: 18px; }
+
+    /* Khi mở menu: morph sang icon X */
+    .nav-hamburger.active {
+      border-color: var(--accent);
+      background: rgba(20, 20, 20, 0.95);
+      box-shadow: 0 0 20px rgba(200, 169, 110, 0.4);
+    }
+    .nav-hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+      background: var(--accent);
+    }
+    .nav-hamburger.active span:nth-child(2) {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    .nav-hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+      background: var(--accent);
+    }
+
+    /* ── TRANSLATOR BUTTON (20 NGÔN NGỮ) ───────────────────────────── */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 102;
+    }
+    .lang-wrap {
+      position: relative;
+    }
+
+    /* ── BACKGROUND MUSIC (BGM) BUTTON ─────────────────────────────── */
+    .bgm-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 24px;
+      background: rgba(16, 16, 16, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(200, 169, 110, 0.35);
+      color: var(--white);
+      cursor: pointer;
+      font-family: var(--ff-mono);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      transition: all .3s cubic-bezier(.16, 1, .3, 1);
+      animation: nav-btn-glow 3s ease-in-out infinite alternate;
+      user-select: none;
+    }
+    .bgm-btn:hover {
+      border-color: var(--accent);
+      background: rgba(26, 26, 26, 0.95);
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(200, 169, 110, 0.35);
+    }
+    .bgm-btn.playing {
+      border-color: var(--accent);
+      background: rgba(26, 26, 26, 0.9);
+      box-shadow: 0 0 18px rgba(200, 169, 110, 0.4);
+    }
+    .bgm-btn .bgm-eq {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 14px;
+      width: 14px;
+    }
+    .bgm-btn .bgm-eq span {
+      display: block;
+      width: 2px;
+      background: var(--muted);
+      border-radius: 2px;
+      height: 3px;
+      transition: height .2s ease, background-color .3s ease;
+    }
+    .bgm-btn.playing .bgm-eq span {
+      background: var(--accent);
+      animation: bgmEqAnim 1s ease-in-out infinite alternate;
+    }
+    .bgm-btn.playing .bgm-eq span:nth-child(1) { animation-duration: 0.55s; }
+    .bgm-btn.playing .bgm-eq span:nth-child(2) { animation-duration: 0.85s; animation-delay: 0.15s; }
+    .bgm-btn.playing .bgm-eq span:nth-child(3) { animation-duration: 0.65s; animation-delay: 0.3s; }
+    .bgm-btn.playing .bgm-eq span:nth-child(4) { animation-duration: 0.95s; animation-delay: 0.45s; }
+
+    @keyframes bgmEqAnim {
+      0% { height: 3px; }
+      100% { height: 14px; }
+    }
+
+    .bgm-btn .bgm-text {
+      font-weight: 700;
+      color: var(--muted);
+      transition: color .3s ease;
+    }
+    .bgm-btn.playing .bgm-text {
+      color: var(--accent);
+    }
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 24px;
+      background: rgba(16, 16, 16, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(200, 169, 110, 0.35);
+      color: var(--white);
+      cursor: pointer;
+      font-family: var(--ff-mono);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      transition: all .3s cubic-bezier(.16, 1, .3, 1);
+      animation: nav-btn-glow 3s ease-in-out infinite alternate;
+      user-select: none;
+    }
+    .lang-btn:hover,
+    .lang-wrap.open .lang-btn {
+      border-color: var(--accent);
+      background: rgba(26, 26, 26, 0.95);
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(200, 169, 110, 0.35);
+    }
+    .lang-btn .lang-icon {
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform .35s ease;
+    }
+    .lang-wrap.open .lang-btn .lang-icon {
+      transform: rotate(45deg);
+    }
+    .lang-curr {
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .lang-arrow {
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid var(--muted);
+      border-bottom: 1.5px solid var(--muted);
+      transform: rotate(45deg) translate(-1px, -1px);
+      transition: transform .3s ease, border-color .3s ease;
+      margin-left: 2px;
+    }
+    .lang-wrap.open .lang-arrow {
+      transform: rotate(-135deg) translate(-1px, -1px);
+      border-color: var(--accent);
+    }
+
+    /* DROPDOWN */
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      width: 330px;
+      max-width: calc(100vw - 32px);
+      background: rgba(14, 14, 14, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(200, 169, 110, 0.45);
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(200, 169, 110, 0.15);
+      padding: 16px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px) scale(0.96);
+      transform-origin: top right;
+      transition: all .25s cubic-bezier(.16, 1, .3, 1);
+      z-index: 1000;
+    }
+    .lang-wrap.open .lang-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+    .lang-dropdown-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .lang-dropdown-header span:first-child {
+      font-family: var(--ff-mono);
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .lang-count-badge {
+      font-family: var(--ff-mono);
+      font-size: .6rem;
+      letter-spacing: .1em;
+      color: var(--accent);
+      background: rgba(200, 169, 110, 0.12);
+      border: 1px solid rgba(200, 169, 110, 0.3);
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+    .lang-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      max-height: 330px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .lang-grid::-webkit-scrollbar { width: 4px; }
+    .lang-grid::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+    .lang-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      color: var(--white);
+      cursor: pointer;
+      font-family: var(--ff-body);
+      font-size: .8rem;
+      text-align: left;
+      transition: all .2s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .lang-item:hover {
+      background: rgba(200, 169, 110, 0.14);
+      border-color: rgba(200, 169, 110, 0.35);
+      color: var(--accent);
+      transform: translateX(2px);
+    }
+    .lang-item.active {
+      background: rgba(200, 169, 110, 0.22);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .lang-item .flag {
+      font-size: 1.1rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .lang-item .name {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: .78rem;
+    }
+
+    /* GOOGLE TRANSLATE RESET */
+    body > iframe,
+    iframe.skiptranslate,
+    iframe[class*="skiptranslate"],
+    iframe.goog-te-banner-frame,
+    .goog-te-banner-frame,
+    .goog-te-banner-frame.skiptranslate,
+    .VIpgJd-ZVi9od-xl07Ob-Oxf5Fd,
+    .VIpgJd-ZVi9od-ORHb-Oxf5Fd,
+    .VIpgJd-ZVi9od-aZ2wEe-Oxf5Fd,
+    .VIpgJd-ZVi9od-vH1Gmf,
+    #goog-gt-tt,
+    .goog-te-balloon-frame {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      height: 0 !important;
+      width: 0 !important;
+      pointer-events: none !important;
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+      z-index: -9999 !important;
+    }
+    body {
+      top: 0px !important;
+      position: static !important;
+    }
+    .goog-te-gadget {
+      display: none !important;
+    }
+    #google_translate_element {
+      display: none !important;
+    }
+    .goog-tooltip, .goog-tooltip:hover {
+      display: none !important;
+    }
+    .goog-text-highlight {
+      background-color: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+    font {
+      background-color: transparent !important;
+      box-shadow: none !important;
+    }
+
+    /* ── MOBILE MENU ─────────────────────────────────────────────── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(8,8,8,.97);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--ff-head);
+      font-size: 3rem;
+      letter-spacing: .1em;
+      color: var(--white);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* ── SECTION GENERIC ──────────────────────────────────────────── */
+    section { position: relative; }
+
+    .section-label {
+      font-family: var(--ff-mono);
+      font-size: .65rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 32px; height: 1px;
+      background: var(--accent);
+    }
+
+    /* ── HERO ─────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hero-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(1) saturate(1);
+    }
+
+    /* gradient vignette removed */
+
+    #hero .section-label {
+      margin-bottom: 8px;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+    }
+    .hero-logo-wrap {
+      margin: 4px 0 8px;
+      display: inline-block;
+      max-width: 100%;
+      will-change: transform, opacity;
+    }
+    .hero-logo-img {
+      width: clamp(160px, 44vw, 300px);
+      max-width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 6px 24px rgba(0,0,0,0.85)) drop-shadow(0 0 30px rgba(200,169,110,0.18));
+    }
+    .hero-name {
+      font-family: var(--ff-head);
+      font-size: clamp(5rem, 16vw, 18rem);
+      line-height: .88;
+      letter-spacing: -.01em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+    .hero-name .outline {
+      -webkit-text-stroke: 1.5px var(--white);
+      color: transparent;
+    }
+    .hero-sub {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-sub-text {
+      font-family: var(--ff-mono);
+      font-size: .75rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-sub-text strong { color: var(--accent); }
+    .hero-scroll {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--ff-mono);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-scroll-line {
+      width: 48px; height: 1px;
+      background: var(--muted);
+      animation: scroll-pulse 2s ease-in-out infinite;
+    }
+    @keyframes scroll-pulse {
+      0%,100% { opacity: .3; width: 48px; }
+      50% { opacity: 1; width: 72px; }
+    }
+
+    /* ── TICKER ──────────────────────────────────────────────────── */
+    .ticker {
+      overflow: hidden;
+      background: var(--accent);
+      padding: 14px 0;
+      position: relative;
+      z-index: 3;
+    }
+    .ticker-inner {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-inner span {
+      font-family: var(--ff-head);
+      font-size: 1rem;
+      letter-spacing: .2em;
+      color: var(--black);
+      padding: 0 32px;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── ABOUT ───────────────────────────────────────────────────── */
+    #about {
+      padding: 140px 48px;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+    }
+    .about-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -20px; left: -20px;
+      right: 20px; bottom: 20px;
+      border: 1px solid var(--border);
+      z-index: 0;
+    }
+    .about-img-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      filter: saturate(.7) brightness(.9);
+      position: relative;
+      z-index: 1;
+      display: block;
+    }
+    .about-year {
+      position: absolute;
+      bottom: -16px; right: -16px;
+      background: var(--accent);
+      color: var(--black);
+      font-family: var(--ff-head);
+      font-size: 5rem;
+      line-height: 1;
+      padding: 12px 20px;
+      z-index: 2;
+    }
+    .about-reverse .about-img-wrap::before {
+      top: -20px; right: -20px;
+      left: 20px; bottom: 20px;
+    }
+    .about-reverse .about-year {
+      bottom: -16px; left: -16px;
+      right: auto;
+    }
+    .about-text h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(3rem, 5vw, 6rem);
+      line-height: .92;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .about-text h2 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .about-text p {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      max-width: 520px;
+    }
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+    .about-tags span {
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      font-family: var(--ff-mono);
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: border-color .2s, color .2s;
+    }
+    .about-tags span:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ── GALLERY ──────────────────────────────────────────────────── */
+    #gallery {
+      padding: 100px 48px;
+    }
+    .gallery-header {
+      max-width: 1400px;
+      margin: 0 auto 60px;
+    }
+    .gallery-header h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(3rem, 6vw, 7rem);
+      line-height: .88;
+      text-transform: uppercase;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 200px;
+      gap: 8px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease, filter .4s ease;
+      filter: saturate(.5) brightness(.8);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.06);
+      filter: saturate(1) brightness(1);
+    }
+    .gallery-item::after {
+      content: '↗';
+      position: absolute;
+      bottom: 12px; right: 12px;
+      font-size: 1.2rem;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* bento layout */
+    .gi-1 { grid-column: span 5; grid-row: span 3; }
+    .gi-2 { grid-column: span 4; grid-row: span 2; }
+    .gi-3 { grid-column: span 3; grid-row: span 2; }
+    .gi-4 { grid-column: span 4; grid-row: span 1; }
+    .gi-5 { grid-column: span 3; grid-row: span 1; }
+    .gi-6 { grid-column: span 5; grid-row: span 2; }
+    .gi-7 { grid-column: span 4; grid-row: span 2; }
+    .gi-8 { grid-column: span 3; grid-row: span 1; }
+    .gi-9 { grid-column: span 3; grid-row: span 1; }
+    .gi-10{ grid-column: span 4; grid-row: span 2; }
+    .gi-11{ grid-column: span 5; grid-row: span 2; }
+    .gi-12{ grid-column: span 3; grid-row: span 1; }
+
+    /* ── VENUES ───────────────────────────────────────────────────── */
+    #venues {
+      padding: 100px 48px;
+      background: linear-gradient(rgba(8, 8, 8, 0.75), rgba(8, 8, 8, 0.82)), url('background/6446a0168bed1b777a643bf1_slmn-8.jpg') center/cover no-repeat;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .venues-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .venues-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .venues-header h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(3rem, 5vw, 6rem);
+      line-height: .88;
+      text-transform: uppercase;
+    }
+    .venues-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .venue-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: padding-left .3s;
+    }
+    .venue-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 0;
+      background: var(--accent);
+      opacity: .07;
+      transition: width .4s ease;
+    }
+    .venue-row:hover::before { width: 100%; }
+    .venue-row:hover { padding-left: 16px; }
+    .venue-num {
+      font-family: var(--ff-mono);
+      font-size: .6rem;
+      color: var(--accent);
+      letter-spacing: .15em;
+      min-width: 48px;
+    }
+    .venue-name {
+      font-family: var(--ff-head);
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      flex: 1;
+      padding-left: 32px;
+    }
+    .venue-city {
+      font-family: var(--ff-mono);
+      font-size: .65rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── MIX / AUDIO PLAYER ──────────────────────────────────────── */
+    #mix {
+      padding: 120px 48px;
+      background: linear-gradient(rgba(8, 8, 8, 0.76), rgba(8, 8, 8, 0.84)), url('PERFORMANCE/Z__07724.jpeg') center/cover no-repeat;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .mix-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .mix-header { margin-bottom: 60px; }
+    .mix-header h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(3rem, 5vw, 6rem);
+      line-height: .88;
+      text-transform: uppercase;
+    }
+    .mix-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .mix-card {
+      background: rgba(20, 20, 20, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mix-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .5s ease;
+    }
+    .mix-card:hover::before { transform: scaleX(1); }
+    .mix-card-label {
+      font-family: var(--ff-mono);
+      font-size: .6rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .mix-card-title {
+      font-family: var(--ff-head);
+      font-size: 2rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .mix-card-meta {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .mix-card audio {
+      width: 100%;
+      filter: invert(1) sepia(1) saturate(2) hue-rotate(5deg);
+      opacity: .85;
+    }
+    .mix-waveform {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 40px;
+      margin-bottom: 20px;
+    }
+    .mix-waveform .bar {
+      flex: 1;
+      background: var(--accent);
+      opacity: .3;
+      border-radius: 1px;
+      animation: wave-anim var(--d, 1s) ease-in-out infinite alternate;
+    }
+    @keyframes wave-anim {
+      from { height: 20%; }
+      to   { height: 100%; }
+    }
+
+    /* ── POSTERS ─────────────────────────────────────────────────── */
+    #posters {
+      padding: 100px 48px;
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+    }
+    .posters-inner { max-width: 1400px; margin: 0 auto; }
+    .posters-header { margin-bottom: 60px; }
+    .posters-header h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(3rem, 5vw, 6rem);
+      line-height: .88;
+      text-transform: uppercase;
+    }
+    .posters-scroll {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) transparent;
+      scroll-snap-type: x mandatory;
+    }
+    .poster-card {
+      flex: 0 0 280px;
+      scroll-snap-align: start;
+      overflow: hidden;
+      position: relative;
+    }
+    .poster-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.6) brightness(.85);
+      transition: filter .4s, transform .5s;
+    }
+    .poster-card:hover img {
+      filter: saturate(1) brightness(1);
+      transform: scale(1.03);
+    }
+
+    /* ── CONTACT ─────────────────────────────────────────────────── */
+    #contact {
+      padding: 160px 48px 120px;
+      text-align: center;
+      position: relative;
+    }
+    #contact::before {
+      content: 'BOOKING';
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--ff-head);
+      font-size: clamp(5rem, 18vw, 20rem);
+      color: rgba(255,255,255,.025);
+      letter-spacing: .05em;
+      white-space: nowrap;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+    }
+    #contact .section-label { justify-content: center; }
+    #contact .section-label::before { display: none; }
+    .contact-title {
+      font-family: var(--ff-head);
+      font-size: clamp(3.5rem, 8vw, 10rem);
+      line-height: .88;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    .contact-title em {
+      font-style: normal;
+      -webkit-text-stroke: 1px var(--white);
+      color: transparent;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: var(--muted);
+      font-family: var(--ff-mono);
+      font-size: .85rem;
+      letter-spacing: .15em;
+      transition: color .25s;
+    }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link .icon {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: border-color .25s, background .25s;
+    }
+    .contact-link:hover .icon {
+      border-color: var(--accent);
+      background: rgba(200,169,110,.1);
+    }
+    .contact-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .social-pill {
+      font-family: var(--ff-mono);
+      font-size: .65rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 10px 24px;
+      border-radius: 100px;
+      transition: color .25s, border-color .25s;
+    }
+    .social-pill:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .footer-logo img {
+      height: 26px;
+      width: auto;
+      display: block;
+      opacity: 0.9;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    .footer-logo:hover img {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    footer p {
+      font-family: var(--ff-mono);
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── LIGHTBOX ─────────────────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.95);
+      z-index: 9000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      animation: lb-in .3s ease;
+    }
+    @keyframes lb-in { from { opacity:0; transform: scale(.95); } to { opacity:1; transform: scale(1); } }
+    .lb-close {
+      position: absolute;
+      top: 24px; right: 32px;
+      font-size: 2rem;
+      color: var(--white);
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+      opacity: .6;
+      transition: opacity .2s;
+    }
+    .lb-close:hover { opacity: 1; }
+
+    /* ── PRELOADER INTRO ──────────────────────────────────────────── */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--black);
+      overflow: hidden;
+    }
+    #preloader.hide {
+      animation: pre-out .9s cubic-bezier(.4,0,.2,1) forwards;
+      pointer-events: none;
+    }
+    @keyframes pre-out {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    .pre-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .pre-content {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* Mỗi logo instance */
+    .pre-logo-item {
+      position: absolute;
+      opacity: 0;
+      transform: scale(.7) rotate(var(--rot, 0deg));
+      width: var(--sz, 180px);
+      transition:
+        opacity   .7s cubic-bezier(.16,1,.3,1),
+        transform .8s cubic-bezier(.16,1,.3,1);
+      filter:
+        drop-shadow(0 0 24px rgba(200,169,110, var(--glow, .08)))
+        brightness(var(--br, 1));
+      will-change: opacity, transform;
+    }
+    .pre-logo-item.visible {
+      opacity: var(--op, 1);
+      transform: scale(1) rotate(var(--rot, 0deg));
+    }
+    .pre-logo-item img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Fade out tất cả trước khi ẩn overlay */
+    #preloader.fading-logos .pre-logo-item {
+      opacity: 0 !important;
+      transform: scale(1.1) rotate(var(--rot, 0deg)) !important;
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .pre-enter-hint {
+      position: absolute;
+      bottom: 45px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 22px;
+      border-radius: 30px;
+      background: rgba(18, 18, 18, 0.7);
+      border: 1px solid rgba(200, 169, 110, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      cursor: pointer;
+      z-index: 10;
+      color: var(--accent);
+      font-family: var(--ff-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(200, 169, 110, 0.15);
+      animation: preHintPulse 2s ease-in-out infinite alternate;
+      user-select: none;
+      transition: all 0.3s ease;
+    }
+    .pre-enter-hint:hover {
+      border-color: var(--accent);
+      background: rgba(26, 26, 26, 0.9);
+      box-shadow: 0 4px 25px rgba(200, 169, 110, 0.35);
+      transform: translateX(-50%) scale(1.04);
+    }
+    .pre-hint-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: preDotPulse 1.2s ease-in-out infinite alternate;
+    }
+    @keyframes preHintPulse {
+      0%   { opacity: 0.75; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(-3px); }
+    }
+    @keyframes preDotPulse {
+      0%   { transform: scale(0.8); opacity: 0.5; }
+      100% { transform: scale(1.3); opacity: 1; }
+    }
+    #preloader.fading-logos .pre-enter-hint {
+      opacity: 0 !important;
+      transition: opacity .4s ease;
+    }
+
+    body.loading { overflow: hidden; }
+
+    /* Base: ẩn trước khi animate */
+    [data-anim] {
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+
+    /* fade-up — default */
+    [data-anim="fade-up"]    { transform: translateY(60px); }
+    [data-anim="fade-down"]  { transform: translateY(-40px); }
+    [data-anim="fade-left"]  { transform: translateX(-60px); }
+    [data-anim="fade-right"] { transform: translateX(60px); }
+    [data-anim="scale-up"]   { transform: scale(.88); }
+    [data-anim="scale-in"]   { transform: scale(1.08); }
+    [data-anim="flip-up"]    { transform: perspective(600px) rotateX(20deg) translateY(40px); }
+    [data-anim="blur-in"]    { filter: blur(12px); transform: translateY(20px); }
+
+    /* Trạng thái sau khi visible */
+    [data-anim].anim-in {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition:
+        opacity  var(--anim-dur, .8s) cubic-bezier(.16,1,.3,1) var(--anim-delay, 0s),
+        transform var(--anim-dur, .8s) cubic-bezier(.16,1,.3,1) var(--anim-delay, 0s),
+        filter   var(--anim-dur, .8s) cubic-bezier(.16,1,.3,1) var(--anim-delay, 0s);
+    }
+
+    /* ── Chữ tách từng dòng (split-text) ── */
+    .split-text .line {
+      overflow: hidden;
+      display: block;
+    }
+    .split-text .line-inner {
+      display: block;
+      transform: translateY(110%);
+      opacity: 0;
+      transition:
+        transform .9s cubic-bezier(.16,1,.3,1) var(--anim-delay, 0s),
+        opacity   .6s ease var(--anim-delay, 0s);
+    }
+    .split-text.anim-in .line-inner {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ── Counter number ── */
+    .count-up { font-variant-numeric: tabular-nums; }
+
+    /* ── Line draw ── */
+    [data-anim="line"] {
+      transform: scaleX(0);
+      transform-origin: left;
+      opacity: 1;
+    }
+    [data-anim="line"].anim-in {
+      transform: scaleX(1);
+      transition: transform 1s cubic-bezier(.16,1,.3,1) var(--anim-delay, 0s);
+    }
+
+    /* Giữ lại .reveal cũ cho tương thích */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      #hero { padding: 0 24px 32px; }
+      .hero-logo-img { width: clamp(150px, 46vw, 240px); }
+      #about {
+        padding: 80px 24px;
+        gap: 80px;
+      }
+      .about-row {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .about-img-wrap { max-width: 360px; }
+      .about-reverse .about-img-wrap::before {
+        top: -20px; left: -20px;
+        right: 20px; bottom: 20px;
+      }
+      .about-reverse .about-year {
+        bottom: -16px; right: -16px;
+        left: auto;
+      }
+
+      #gallery { padding: 80px 24px; }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 160px;
+      }
+      .gi-1,.gi-2,.gi-3,.gi-4,.gi-5,.gi-6,
+      .gi-7,.gi-8,.gi-9,.gi-10,.gi-11,.gi-12 {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+      .gi-1 { grid-column: span 2; grid-row: span 2; }
+
+      #venues { padding: 80px 24px; }
+      #mix { padding: 80px 24px; }
+      .mix-cards { grid-template-columns: 1fr; }
+      #posters { padding: 80px 24px; }
+      #contact { padding: 120px 24px 80px; }
+      footer { padding: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      nav { padding: 16px 20px; }
+      nav.scrolled { padding: 12px 20px; }
+      .nav-logo img { width: 36px; height: 36px; }
+      .nav-actions { gap: 8px; }
+      .nav-hamburger { width: 38px; height: 38px; }
+      .lang-btn { height: 38px; padding: 0 10px; font-size: .65rem; gap: 5px; }
+      .bgm-btn { height: 38px; padding: 0 9px; font-size: .65rem; gap: 5px; }
+      .bgm-btn .bgm-text { display: none; }
+      .lang-arrow { display: none; }
+      #hero { padding: 0 20px 24px; }
+      #hero .section-label { margin-bottom: 4px; }
+      .hero-logo-wrap { margin: 2px 0 4px; }
+      .hero-logo-img { width: clamp(140px, 48vw, 210px); }
+      .hero-name { font-size: 18vw; }
+      .hero-sub { margin-top: 6px; flex-direction: column; align-items: flex-start; gap: 8px; }
+      .hero-scroll { margin-left: 0; }
+      .venue-city { display: none; }
+    }
+  </style>
+</head>
+<body class="loading">
+
+  <!-- ═══════════════════ INTRO PRELOADER -->
+  <div id="preloader">
+    <div class="pre-bg"></div>
+    <div class="pre-content" id="preContent"></div>
+    <div class="pre-enter-hint" id="preEnterHint">
+      <span class="pre-hint-pulse"></span>
+      <span class="pre-hint-text">CHẠM ĐỂ BẮT ĐẦU · TAP TO ENTER</span>
+    </div>
+  </div>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" id="lbClose">×</button>
+    <img src="" alt="" id="lbImg" />
+  </div>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo" aria-label="P EIGHT Home">
+      <img src="IMAGE_/9A6721BB-CA8C-47A9-A167-0FDA7C62944A.png" alt="P EIGHT" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#venues">Venues</a></li>
+      <li><a href="#mix">Mix</a></li>
+      <li><a href="#contact">Booking</a></li>
+    </ul>
+    <div class="nav-actions">
+      <!-- NÚT BẬT / TẮT NHẠC NỀN -->
+      <button class="bgm-btn" id="bgmBtn" type="button" aria-label="Bật/Tắt nhạc nền" title="Nhạc nền: P EIGHT Intro">
+        <span class="bgm-eq" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </span>
+        <span class="bgm-text">MUSIC</span>
+      </button>
+
+      <!-- NÚT DỊCH 20 NGÔN NGỮ -->
+      <div class="lang-wrap" id="langWrap">
+        <button class="lang-btn" id="langBtn" type="button" aria-label="Chọn ngôn ngữ" title="Dịch trang (20 ngôn ngữ)">
+          <svg class="lang-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M2 12h20"></path>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span class="lang-curr" id="langCurr">VI</span>
+          <span class="lang-arrow"></span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown" role="menu">
+          <div class="lang-dropdown-header">
+            <span>Dịch trang / Translate</span>
+            <span class="lang-count-badge">20 Ngôn ngữ</span>
+          </div>
+          <div class="lang-grid" id="langGrid"></div>
+        </div>
+      </div>
+
+      <!-- NÚT MENU HAMBURGER -->
+      <button class="nav-hamburger" id="hamburger" aria-label="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- BACKGROUND MUSIC AUDIO -->
+  <audio id="bgmAudio" src="MIXTAPE_/intro.mp3" autoplay loop preload="auto" playsinline>
+    <source src="MIXTAPE_/intro.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Google Translate container (hidden) -->
+  <div id="google_translate_element" style="display:none;"></div>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="mm-link">About</a>
+    <a href="#gallery" class="mm-link">Gallery</a>
+    <a href="#venues" class="mm-link">Venues</a>
+    <a href="#mix" class="mm-link">Mix</a>
+    <a href="#contact" class="mm-link">Booking</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════ HERO -->
+  <section id="hero">
+    <div class="hero-bg" id="heroBg">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="IMAGE_/XH2N0717-2.jpg"
+      >
+        <source src="RECAP/hero_recap.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-content">
+      <div class="section-label" style="color:rgba(200,169,110,.6)" data-anim="fade-right" style="--anim-delay:.3s">
+        <span>DJ / Open Format / Nha Trang</span>
+      </div>
+      <div class="hero-logo-wrap" id="heroName">
+        <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;">P EIGHT</h1>
+        <img src="LOGO_/Logo chữ ký P-Eight mạ vàng.png" alt="P EIGHT" class="hero-logo-img" />
+      </div>
+      <div class="hero-sub" data-anim="fade-up" style="--anim-delay:.8s">
+        <span class="hero-sub-text">House · Hiphop · Trap · Techno<br><strong>Since 2020</strong></span>
+        <div class="hero-scroll">
+          <div class="hero-scroll-line"></div>
+          Scroll
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-inner" id="tickerInner">
+      <span>P EIGHT</span>
+      <span>★</span>
+      <span>HOUSE</span>
+      <span>★</span>
+      <span>HIPHOP</span>
+      <span>★</span>
+      <span>TRAP</span>
+      <span>★</span>
+      <span>TECHNO</span>
+      <span>★</span>
+      <span>FESTIVAL MUSIC</span>
+      <span>★</span>
+      <span>NHA TRANG</span>
+      <span>★</span>
+      <span>OPEN FORMAT</span>
+      <span>★</span>
+      <span>P EIGHT</span>
+      <span>★</span>
+      <span>HOUSE</span>
+      <span>★</span>
+      <span>HIPHOP</span>
+      <span>★</span>
+      <span>TRAP</span>
+      <span>★</span>
+      <span>TECHNO</span>
+      <span>★</span>
+      <span>FESTIVAL MUSIC</span>
+      <span>★</span>
+      <span>NHA TRANG</span>
+      <span>★</span>
+      <span>OPEN FORMAT</span>
+      <span>★</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ ABOUT -->
+  <section id="about">
+    <!-- DJ BLOCK -->
+    <div class="about-row">
+      <div class="about-img-wrap" data-anim="fade-right">
+        <img src="IMAGE_/9A6721BB-CA8C-47A9-A167-0FDA7C62944A.png" alt="DJ P EIGHT" loading="lazy" />
+      </div>
+      <div class="about-text">
+        <div class="section-label" data-anim="fade-left" style="--anim-delay:.1s">DJ</div>
+        <h2 class="split-text" data-anim="fade-up" style="--anim-delay:.15s"><em>P Eight</em></h2>
+        <p data-anim="fade-up" style="--anim-delay:.25s">
+          DJ P Eight — một trong những open format DJ tiêu biểu đến từ Nha Trang. 
+          Bắt đầu sự nghiệp từ năm 2020, P Eight mang đến những set nhạc đa dạng và đầy năng lượng, 
+          không bị giới hạn bởi một thể loại duy nhất.
+        </p>
+        <p data-anim="fade-up" style="--anim-delay:.35s">
+          Với phong cách Open Format, P Eight linh hoạt di chuyển giữa House, Hiphop, Trap, Techno 
+          và Festival music — đọc được cảm xúc sàn nhảy và dẫn dắt đám đông theo từng nhịp beat.
+        </p>
+        <p data-anim="fade-up" style="--anim-delay:.45s">
+          Sinh ra, lớn lên và hoạt động tại Nha Trang, P Eight đã xuất hiện tại các sân khấu lớn 
+          trên toàn quốc từ Phú Quốc đến Vũng Tàu, Quy Nhơn và Đà Lạt.
+        </p>
+        <div class="about-tags" data-anim="fade-up" style="--anim-delay:.55s">
+          <span>Open Format</span>
+          <span>House</span>
+          <span>Hiphop</span>
+          <span>Trap</span>
+          <span>Techno</span>
+          <span>Festival Music</span>
+          <span>Nha Trang</span>
+          <span>Since 2020</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MC HYPE BLOCK -->
+    <div class="about-row about-reverse">
+      <div class="about-text">
+        <div class="section-label" data-anim="fade-left" style="--anim-delay:.1s">MC HYPE</div>
+        <h2 class="split-text" data-anim="fade-up" style="--anim-delay:.15s"><em>MC Hype</em></h2>
+        <p data-anim="fade-up" style="--anim-delay:.25s">
+          Song hành cùng vai trò DJ, P Eight còn là một MC Hype đầy nhiệt huyết — người làm chủ sân khấu, truyền lửa và kích hoạt năng lượng bùng nổ cho mọi đêm tiệc.
+        </p>
+        <p data-anim="fade-up" style="--anim-delay:.35s">
+          Với chất giọng nội lực, phong thái tự tin cùng khả năng làm chủ không khí sự kiện nhạy bén, P Eight kết nối trực tiếp cảm xúc của khán giả với âm nhạc, biến mỗi khoảnh khắc trên sàn nhảy thành những đợt sóng cuồng nhiệt.
+        </p>
+        <p data-anim="fade-up" style="--anim-delay:.45s">
+          Khả năng linh hoạt giữa việc dẫn dắt âm nhạc và khuấy động đám đông giúp P Eight luôn mang đến màn trình diễn thăng hoa tại các club, beach party và festival quy mô lớn.
+        </p>
+        <div class="about-tags" data-anim="fade-up" style="--anim-delay:.55s">
+          <span>MC Hype</span>
+          <span>Crowd Control</span>
+          <span>Stage Energy</span>
+          <span>Host &amp; Hype</span>
+          <span>Festival MC</span>
+          <span>Party Host</span>
+          <span>Nha Trang</span>
+        </div>
+      </div>
+      <div class="about-img-wrap" data-anim="fade-right">
+        <img src="IMAGE_/ADB4FEFF-8269-410C-8D63-2D0B3647860B.png" alt="MC HYPE P EIGHT" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ GALLERY -->
+  <section id="gallery">
+    <div class="gallery-header">
+      <div class="section-label" data-anim="fade-right">Gallery</div>
+      <h2 class="split-text" data-anim="fade-up" style="--anim-delay:.1s">On<br>Stage</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item gi-1" data-src="PERFORMANCE/Z__07691.jpeg" data-anim="scale-up" style="--anim-delay:.05s"><img src="PERFORMANCE/Z__07691.jpeg" alt="P Eight Performance" loading="lazy" /></div>
+      <div class="gallery-item gi-2" data-src="PERFORMANCE/Z__07445.jpeg" data-anim="fade-up" style="--anim-delay:.1s"><img src="PERFORMANCE/Z__07445.jpeg" alt="P Eight Performance" loading="lazy" /></div>
+      <div class="gallery-item gi-3" data-src="PERFORMANCE/IMG_1635.JPG" data-anim="fade-up" style="--anim-delay:.15s"><img src="PERFORMANCE/IMG_1635.JPG" alt="P Eight Performance" loading="lazy" /></div>
+      <div class="gallery-item gi-4" data-src="PERFORMANCE/DOM CLUB126.jpeg" data-anim="fade-up" style="--anim-delay:.2s"><img src="PERFORMANCE/DOM CLUB126.jpeg" alt="DOM Club" loading="lazy" /></div>
+      <div class="gallery-item gi-5" data-src="PERFORMANCE/Z__08186.jpeg" data-anim="fade-up" style="--anim-delay:.25s"><img src="PERFORMANCE/Z__08186.jpeg" alt="P Eight Performance" loading="lazy" /></div>
+      <div class="gallery-item gi-6" data-src="PERFORMANCE/487355438_685572434029720_442178888811343579_n.jpg" data-anim="fade-left" style="--anim-delay:.1s"><img src="PERFORMANCE/487355438_685572434029720_442178888811343579_n.jpg" alt="P Eight Performance" loading="lazy" /></div>
+      <div class="gallery-item gi-7" data-src="PERFORMANCE/480506390_654844640435833_2173394506028275661_n.jpg" data-anim="fade-right" style="--anim-delay:.15s"><img src="PERFORMANCE/480506390_654844640435833_2173394506028275661_n.jpg" alt="P Eight Performance" loading="lazy" /></div>
+      <div class="gallery-item gi-8" data-src="PERFORMANCE/Z__07724.jpeg" data-anim="scale-up" style="--anim-delay:.2s"><img src="PERFORMANCE/Z__07724.jpeg" alt="P Eight Performance" loading="lazy" /></div>
+      <div class="gallery-item gi-9" data-src="PERFORMANCE/ZIN00832.jpeg" data-anim="scale-up" style="--anim-delay:.25s"><img src="PERFORMANCE/ZIN00832.jpeg" alt="P Eight Performance" loading="lazy" /></div>
+      <div class="gallery-item gi-10" data-src="PERFORMANCE/487507718_688250870428543_3054595699618079843_n.jpg" data-anim="fade-up" style="--anim-delay:.1s"><img src="PERFORMANCE/487507718_688250870428543_3054595699618079843_n.jpg" alt="P Eight Performance" loading="lazy" /></div>
+      <div class="gallery-item gi-11" data-src="PERFORMANCE/Z__09098.jpeg" data-anim="blur-in" style="--anim-delay:.15s"><img src="PERFORMANCE/Z__09098.jpeg" alt="P Eight Performance" loading="lazy" /></div>
+      <div class="gallery-item gi-12" data-src="PERFORMANCE/IMG_3616.JPG" data-anim="scale-up" style="--anim-delay:.2s"><img src="PERFORMANCE/IMG_3616.JPG" alt="P Eight Performance" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ VENUES -->
+  <section id="venues">
+    <div class="venues-inner">
+      <div class="venues-header">
+        <div>
+          <div class="section-label" data-anim="fade-right">Stages</div>
+          <h2 class="split-text" data-anim="fade-up" style="--anim-delay:.1s">Venues<br>&amp; Clubs</h2>
+        </div>
+      </div>
+      <div class="venues-list">
+        <div class="venue-row" data-anim="fade-up" style="--anim-delay:.05s">
+          <span class="venue-num">01</span>
+          <span class="venue-name">DOM Nha Trang</span>
+          <span class="venue-city">Nha Trang</span>
+        </div>
+        <div class="venue-row" data-anim="fade-up" style="--anim-delay:.1s">
+          <span class="venue-num">02</span>
+          <span class="venue-name">Sailing Club Beach Club</span>
+          <span class="venue-city">Nha Trang</span>
+        </div>
+        <div class="venue-row" data-anim="fade-up" style="--anim-delay:.15s">
+          <span class="venue-num">03</span>
+          <span class="venue-name">Jisoo Club</span>
+          <span class="venue-city">Nha Trang</span>
+        </div>
+        <div class="venue-row" data-anim="fade-up" style="--anim-delay:.2s">
+          <span class="venue-num">04</span>
+          <span class="venue-name">INK 360</span>
+          <span class="venue-city">Phú Quốc</span>
+        </div>
+        <div class="venue-row" data-anim="fade-up" style="--anim-delay:.25s">
+          <span class="venue-num">05</span>
+          <span class="venue-name">Route 77</span>
+          <span class="venue-city">Quy Nhơn</span>
+        </div>
+        <div class="venue-row" data-anim="fade-up" style="--anim-delay:.3s">
+          <span class="venue-num">06</span>
+          <span class="venue-name">Revo</span>
+          <span class="venue-city">Vũng Tàu</span>
+        </div>
+        <div class="venue-row" data-anim="fade-up" style="--anim-delay:.35s">
+          <span class="venue-num">07</span>
+          <span class="venue-name">D-Lounge</span>
+          <span class="venue-city">Đức Trọng</span>
+        </div>
+        <div class="venue-row" data-anim="fade-up" style="--anim-delay:.4s">
+          <span class="venue-num">08</span>
+          <span class="venue-name">Venus Player</span>
+          <span class="venue-city">—</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ MIX -->
+  <section id="mix">
+    <div class="mix-inner">
+      <div class="mix-header">
+        <div class="section-label" data-anim="fade-right">Listen</div>
+        <h2 class="split-text" data-anim="fade-up" style="--anim-delay:.1s">Mix<br>Sets</h2>
+      </div>
+      <div class="mix-cards">
+
+        <!-- Card 1 -->
+        <div class="mix-card" data-anim="fade-up" style="--anim-delay:.1s">
+          <div class="mix-card-label">Mixtape Vol.1</div>
+          <div class="mix-card-title">Full Set 40 Min</div>
+          <div class="mix-card-meta">P Eight · Open Format Mix</div>
+          <div class="mix-waveform" aria-hidden="true">
+            <div class="bar" style="--d:.6s; height:40%"></div>
+            <div class="bar" style="--d:.9s; height:70%"></div>
+            <div class="bar" style="--d:.7s; height:50%"></div>
+            <div class="bar" style="--d:1.1s; height:90%"></div>
+            <div class="bar" style="--d:.8s; height:60%"></div>
+            <div class="bar" style="--d:1.3s; height:80%"></div>
+            <div class="bar" style="--d:.6s; height:35%"></div>
+            <div class="bar" style="--d:1.0s; height:75%"></div>
+            <div class="bar" style="--d:.7s; height:55%"></div>
+            <div class="bar" style="--d:.9s; height:65%"></div>
+            <div class="bar" style="--d:1.2s; height:85%"></div>
+            <div class="bar" style="--d:.8s; height:45%"></div>
+            <div class="bar" style="--d:1.1s; height:70%"></div>
+            <div class="bar" style="--d:.6s; height:40%"></div>
+            <div class="bar" style="--d:.9s; height:80%"></div>
+            <div class="bar" style="--d:.7s; height:55%"></div>
+            <div class="bar" style="--d:1.0s; height:90%"></div>
+            <div class="bar" style="--d:1.3s; height:60%"></div>
+            <div class="bar" style="--d:.8s; height:75%"></div>
+            <div class="bar" style="--d:.6s; height:50%"></div>
+          </div>
+          <audio controls preload="none">
+            <source src="MIXTAPE_/MIXTAPE 40min (DJ PI EIGHT).wav" type="audio/wav" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="mix-card" data-anim="fade-up" style="--anim-delay:.2s">
+          <div class="mix-card-label">Mix Set Vol.2</div>
+          <div class="mix-card-title">Quick Set 10 Min</div>
+          <div class="mix-card-meta">P Eight · Promo Mix</div>
+          <div class="mix-waveform" aria-hidden="true">
+            <div class="bar" style="--d:.8s; height:55%"></div>
+            <div class="bar" style="--d:.6s; height:80%"></div>
+            <div class="bar" style="--d:1.0s; height:40%"></div>
+            <div class="bar" style="--d:.9s; height:70%"></div>
+            <div class="bar" style="--d:.7s; height:90%"></div>
+            <div class="bar" style="--d:1.2s; height:50%"></div>
+            <div class="bar" style="--d:.8s; height:65%"></div>
+            <div class="bar" style="--d:1.1s; height:35%"></div>
+            <div class="bar" style="--d:.6s; height:75%"></div>
+            <div class="bar" style="--d:.9s; height:85%"></div>
+            <div class="bar" style="--d:.7s; height:45%"></div>
+            <div class="bar" style="--d:1.3s; height:60%"></div>
+            <div class="bar" style="--d:.8s; height:80%"></div>
+            <div class="bar" style="--d:1.0s; height:55%"></div>
+            <div class="bar" style="--d:.6s; height:70%"></div>
+            <div class="bar" style="--d:.9s; height:40%"></div>
+            <div class="bar" style="--d:.7s; height:90%"></div>
+            <div class="bar" style="--d:1.1s; height:65%"></div>
+            <div class="bar" style="--d:.8s; height:75%"></div>
+            <div class="bar" style="--d:1.2s; height:50%"></div>
+          </div>
+          <audio controls preload="none">
+            <source src="MIXTAPE_/MIXSET 10min Pi Eight.wav" type="audio/wav" />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ POSTERS -->
+  <section id="posters">
+    <div class="posters-inner">
+      <div class="posters-header">
+        <div class="section-label" data-anim="fade-right">Events</div>
+        <h2 class="split-text" data-anim="fade-up" style="--anim-delay:.1s">Posters<br>&amp; Events</h2>
+      </div>
+      <div class="posters-scroll" data-anim="fade-up" style="--anim-delay:.2s">
+        <div class="poster-card"><img src="POSTER/494741403_1046932094079156_5345835645265765575_n.jpg" alt="Event Poster" loading="lazy" /></div>
+        <div class="poster-card"><img src="POSTER/554533147_824505986803030_2518526355169623412_n.jpg" alt="Event Poster" loading="lazy" /></div>
+        <div class="poster-card"><img src="POSTER/612045087_122116996143118796_6660998065843396335_n.jpg" alt="Event Poster" loading="lazy" /></div>
+        <div class="poster-card"><img src="POSTER/636094193_1271663308272699_3508200998993852438_n.jpg" alt="Event Poster" loading="lazy" /></div>
+        <div class="poster-card"><img src="POSTER/IMG_1619.JPG" alt="Event Poster" loading="lazy" /></div>
+        <div class="poster-card"><img src="POSTER/IMG_1620.JPG" alt="Event Poster" loading="lazy" /></div>
+        <div class="poster-card"><img src="POSTER/IMG_1621.JPG" alt="Event Poster" loading="lazy" /></div>
+        <div class="poster-card"><img src="POSTER/IMG_1622.JPG" alt="Event Poster" loading="lazy" /></div>
+        <div class="poster-card"><img src="POSTER/IMG_6289.JPG" alt="Event Poster" loading="lazy" /></div>
+        <div class="poster-card"><img src="POSTER/IMG_6341.JPG" alt="Event Poster" loading="lazy" /></div>
+        <div class="poster-card"><img src="POSTER/IMG_5283.PNG" alt="Event Poster" loading="lazy" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="section-label" data-anim="fade-up">Get In Touch</div>
+      <h2 class="contact-title split-text" data-anim="fade-up" style="--anim-delay:.1s">
+        Book<br><em>P Eight</em>
+      </h2>
+      <div class="contact-links" data-anim="fade-up" style="--anim-delay:.25s">
+        <a href="tel:0797935879" class="contact-link">
+          <div class="icon">📞</div>
+          <span>0797 935 879</span>
+        </a>
+        <a href="mailto:djpi8.phucle@gmail.com" class="contact-link">
+          <div class="icon">✉</div>
+          <span>djpi8.phucle@gmail.com</span>
+        </a>
+      </div>
+      <div class="contact-social" data-anim="fade-up" style="--anim-delay:.4s">
+        <a href="https://www.instagram.com/djpi8.legacy" target="_blank" rel="noopener" class="social-pill">Instagram</a>
+        <a href="https://www.facebook.com/djpi8.legacy" target="_blank" rel="noopener" class="social-pill">Facebook</a>
+        <a href="PRESSKIT/P-EIGHT.pdf" target="_blank" class="social-pill">Press Kit ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#hero" class="footer-logo" aria-label="P EIGHT Home">
+      <img src="LOGO_/wh P-EIGHT-trimmed.png" alt="P EIGHT" />
+    </a>
+    <p>© 2024 P Eight . Nha Trang, Vietnam.</p>
+    <p>djpi8.legacy</p>
+  </footer>
+
+  <!-- ═══════════════════════════════════════ SCRIPTS -->
+  <script>
+    /* — Cursor — */
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animCursor() {
+      dot.style.left  = mx + 'px';
+      dot.style.top   = my + 'px';
+      rx += (mx - rx) * .14;
+      ry += (my - ry) * .14;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+
+    /* — Navbar scroll — */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    /* — Mobile menu — */
+    const hamburger   = document.getElementById('hamburger');
+    const mobileMenu  = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+    });
+    document.querySelectorAll('.mm-link').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    /* — Lightbox — */
+    const lb      = document.getElementById('lightbox');
+    const lbImg   = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        lbImg.src = item.dataset.src;
+        lb.classList.add('open');
+      });
+    });
+    lbClose.addEventListener('click', () => lb.classList.remove('open'));
+    lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
+
+    /* ═══════════════════════════════════════════════
+       PRELOADER — Multi-logo scatter
+    ═══════════════════════════════════════════════ */
+    const preloader   = document.getElementById('preloader');
+    const preContent  = document.getElementById('preContent');
+
+    // 8 vị trí rải khắp màn hình (% từ top-left, tính từ center logo)
+    // Mỗi slot: [top%, left%, size(px), opacity, rotation(deg), glowOpacity]
+    const SLOTS = [
+      // logo đầu tiên: chính giữa, to nhất
+      { top: 50, left: 50, sz: 220, op: 1,    rot:  0,   glow: .25, br: 1   },
+      // top-left
+      { top: 12, left: 10, sz: 130, op: .55,  rot: -8,   glow: .08, br: .75 },
+      // top-center-left  ← MỚI
+      { top:  8, left: 38, sz: 115, op: .45,  rot:  5,   glow: .06, br: .65 },
+      // top-center-right ← MỚI
+      { top: 18, left: 62, sz: 125, op: .5,   rot: -4,   glow: .07, br: .7  },
+      // top-right
+      { top: 10, left: 78, sz: 150, op: .5,   rot:  6,   glow: .08, br: .7  },
+      // mid-left
+      { top: 42, left:  6, sz: 110, op: .4,   rot:-12,   glow: .05, br: .65 },
+      // mid-right
+      { top: 55, left: 80, sz: 140, op: .45,  rot:  9,   glow: .07, br: .7  },
+      // bottom-left
+      { top: 76, left: 14, sz: 160, op: .6,   rot: -5,   glow: .1,  br: .8  },
+      // bottom-center
+      { top: 82, left: 48, sz: 120, op: .45,  rot:  4,   glow: .06, br: .65 },
+      // bottom-right
+      { top: 70, left: 76, sz: 100, op: .35,  rot: 11,   glow: .04, br: .6  },
+    ];
+
+    // Delay giữa mỗi logo xuất hiện (ms)
+    const SPAWN_INTERVAL = 480;
+    // Thời gian giữ max logos trước khi fade out
+    const HOLD_DURATION  = 900;
+
+    const logoItems = [];
+
+    function spawnLogo(slot) {
+      const el = document.createElement('div');
+      el.className = 'pre-logo-item';
+
+      // Căn chỉnh vị trí dựa vào center của logo
+      el.style.cssText = `
+        top: ${slot.top}%;
+        left: ${slot.left}%;
+        transform-origin: center center;
+        --sz: ${slot.sz}px;
+        --op: ${slot.op};
+        --rot: ${slot.rot}deg;
+        --glow: ${slot.glow};
+        --br: ${slot.br};
+        width: ${slot.sz}px;
+        margin-top: -${slot.sz * 0.3}px;
+        margin-left: -${slot.sz / 2}px;
+      `;
+
+      const img = document.createElement('img');
+      img.src = 'LOGO_/wh P-EIGHT.png';
+      img.alt = 'P EIGHT';
+      el.appendChild(img);
+      preContent.appendChild(el);
+      logoItems.push(el);
+
+      // Trigger visible sau 1 frame
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.classList.add('visible');
+      }));
+      return el;
+    }
+
+    // Spawn lần lượt từng logo
+    SLOTS.forEach((slot, i) => {
+      setTimeout(() => spawnLogo(slot), i * SPAWN_INTERVAL);
+    });
+
+    // Sau khi spawn hết + giữ thêm → fade logos rồi ẩn overlay
+    const totalSpawnTime = SLOTS.length * SPAWN_INTERVAL + HOLD_DURATION;
+
+    let preloaderDismissed = false;
+    let preloaderTimer = null;
+
+    function dismissPreloader() {
+      if (preloaderDismissed || !preloader) return;
+      preloaderDismissed = true;
+      if (preloaderTimer) clearTimeout(preloaderTimer);
+
+      // Phase 1: fade tất cả logos
+      preloader.classList.add('fading-logos');
+
+      // Phase 2: fade overlay
+      setTimeout(() => {
+        document.body.classList.remove('loading');
+        preloader.classList.add('hide');
+        setTimeout(() => preloader.remove(), 950);
+        setTimeout(heroIntro, 100);
+      }, 700);
+    }
+
+    preloaderTimer = setTimeout(dismissPreloader, totalSpawnTime);
+
+    // Chạm bất kỳ đâu trên màn hình Preloader để vào ngay và kích hoạt nhạc tự động
+    if (preloader) {
+      const handlePreloaderEnter = (e) => {
+        if (typeof playBgm === 'function') playBgm();
+        dismissPreloader();
+      };
+      preloader.addEventListener('click', handlePreloaderEnter);
+      preloader.addEventListener('touchend', handlePreloaderEnter);
+    }
+
+    /* ═══════════════════════════════════════════════
+       ANIMATION ENGINE
+    ═══════════════════════════════════════════════ */
+
+    /* 1. Split heading text thành từng dòng để animate */
+    function splitLines(el) {
+      const html = el.innerHTML;
+      const parts = html.split(/<br\s*\/?>/i);
+      const baseDelay = parseFloat(el.style.getPropertyValue('--anim-delay') || '0') || 0;
+      el.innerHTML = parts.map((part, i) => {
+        const d = baseDelay + i * 0.12;
+        return `<span class="line"><span class="line-inner" style="--anim-delay:${d}s">${part}</span></span>`;
+      }).join('');
+    }
+    document.querySelectorAll('.split-text').forEach(el => splitLines(el));
+
+    /* 2. Hero intro — chạy ngay khi trang load */
+    function heroIntro() {
+      const label = document.querySelector('#hero .section-label');
+      const name  = document.querySelector('#hero .hero-name');
+      const sub   = document.querySelector('#hero .hero-sub');
+
+      if (label) {
+        Object.assign(label.style, { opacity:'0', transform:'translateX(-30px)',
+          transition:'opacity .7s ease .2s, transform .7s cubic-bezier(.16,1,.3,1) .2s' });
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          label.style.opacity = '1'; label.style.transform = 'none';
+        }));
+      }
+      if (name) {
+        Object.assign(name.style, {
+          opacity: '0',
+          transform: 'translateY(28px) scale(0.95)',
+          transition: 'opacity .8s cubic-bezier(.16,1,.3,1) .35s, transform .8s cubic-bezier(.16,1,.3,1) .35s'
+        });
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          name.style.opacity = '1';
+          name.style.transform = 'none';
+        }));
+      }
+      if (sub) {
+        Object.assign(sub.style, { opacity:'0', transform:'translateY(24px)',
+          transition:'opacity .8s ease .9s, transform .8s cubic-bezier(.16,1,.3,1) .9s' });
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          sub.style.opacity = '1'; sub.style.transform = 'none';
+        }));
+      }
+    }
+    window.addEventListener('load', () => {
+      // heroIntro sẽ do preloader gọi sau 5s
+    });
+
+    /* 3. IntersectionObserver cho [data-anim] */
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('anim-in');
+        animObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('[data-anim]').forEach(el => {
+      if (el.closest('#hero')) return; // hero handled by heroIntro
+      animObserver.observe(el);
+    });
+
+    /* 4. Legacy .reveal vẫn hoạt động */
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    /* ════════════════════════════════════════════════════════════════
+       5. CHỨC NĂNG DỊCH 20 NGÔN NGỮ (LANGUAGE TRANSLATOR)
+    ════════════════════════════════════════════════════════════════ */
+    const LANGUAGES = [
+      { code: 'vi',    name: 'Tiếng Việt', flag: '🇻🇳', label: 'VI' },
+      { code: 'en',    name: 'English',    flag: '🇬🇧', label: 'EN' },
+      { code: 'zh-CN', name: '简体中文',  flag: '🇨🇳', label: 'CN' },
+      { code: 'zh-TW', name: '繁體中文',  flag: '🇹🇼', label: 'TW' },
+      { code: 'ja',    name: '日本語',    flag: '🇯🇵', label: 'JA' },
+      { code: 'ko',    name: '한국어',    flag: '🇰🇷', label: 'KO' },
+      { code: 'ru',    name: 'Русский',   flag: '🇷🇺', label: 'RU' },
+      { code: 'fr',    name: 'Français',  flag: '🇫🇷', label: 'FR' },
+      { code: 'de',    name: 'Deutsch',   flag: '🇩🇪', label: 'DE' },
+      { code: 'es',    name: 'Español',   flag: '🇪🇸', label: 'ES' },
+      { code: 'th',    name: 'ภาษาไทย',   flag: '🇹🇭', label: 'TH' },
+      { code: 'id',    name: 'Indonesia', flag: '🇮🇩', label: 'ID' },
+      { code: 'ms',    name: 'Melayu',    flag: '🇲🇾', label: 'MS' },
+      { code: 'it',    name: 'Italiano',  flag: '🇮🇹', label: 'IT' },
+      { code: 'pt',    name: 'Português', flag: '🇵🇹', label: 'PT' },
+      { code: 'ar',    name: 'العربية',   flag: '🇸🇦', label: 'AR' },
+      { code: 'hi',    name: 'हिन्दी',     flag: '🇮🇳', label: 'HI' },
+      { code: 'tr',    name: 'Türkçe',    flag: '🇹🇷', label: 'TR' },
+      { code: 'nl',    name: 'Nederlands',flag: '🇳🇱', label: 'NL' },
+      { code: 'pl',    name: 'Polski',    flag: '🇵🇱', label: 'PL' }
+    ];
+
+    function getActiveLanguage() {
+      const match = document.cookie.match(/googtrans=\/vi\/([a-zA-Z\-]+)/);
+      if (match && match[1]) return match[1];
+      return localStorage.getItem('site_lang') || 'vi';
+    }
+
+    function initLanguageDropdown() {
+      const langGrid = document.getElementById('langGrid');
+      const langCurr = document.getElementById('langCurr');
+      const current = getActiveLanguage();
+
+      const activeLang = LANGUAGES.find(l => l.code === current) || LANGUAGES[0];
+      if (langCurr) langCurr.textContent = activeLang.label;
+
+      if (langGrid) {
+        langGrid.innerHTML = LANGUAGES.map(l => `
+          <button type="button" class="lang-item ${l.code === current ? 'active' : ''}" data-code="${l.code}" data-label="${l.label}">
+            <span class="flag">${l.flag}</span>
+            <span class="name">${l.name}</span>
+          </button>
+        `).join('');
+
+        langGrid.querySelectorAll('.lang-item').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const code = btn.dataset.code;
+            const label = btn.dataset.label;
+            applyLanguage(code, label);
+          });
+        });
+      }
+    }
+
+    function applyLanguage(code, label) {
+      const langWrap = document.getElementById('langWrap');
+      const langCurr = document.getElementById('langCurr');
+      if (langCurr) langCurr.textContent = label;
+      if (langWrap) langWrap.classList.remove('open');
+      localStorage.setItem('site_lang', code);
+
+      const hostname = window.location.hostname;
+      if (code === 'vi') {
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=' + hostname + '; path=/;';
+      } else {
+        document.cookie = 'googtrans=/vi/' + code + '; path=/;';
+        document.cookie = 'googtrans=/vi/' + code + '; domain=' + hostname + '; path=/;';
+      }
+
+      document.querySelectorAll('.lang-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.code === code);
+      });
+
+      const combo = document.querySelector('.goog-te-combo');
+      if (combo) {
+        combo.value = code;
+        combo.dispatchEvent(new Event('change'));
+      } else {
+        location.reload();
+      }
+    }
+
+    const langBtn = document.getElementById('langBtn');
+    const langWrap = document.getElementById('langWrap');
+    if (langBtn && langWrap) {
+      langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langWrap.classList.toggle('open');
+      });
+      document.addEventListener('click', (e) => {
+        if (!langWrap.contains(e.target)) {
+          langWrap.classList.remove('open');
+        }
+      });
+    }
+
+    window.googleTranslateElementInit = function() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'vi',
+        includedLanguages: LANGUAGES.map(l => l.code).join(','),
+        autoDisplay: false
+      }, 'google_translate_element');
+    };
+
+    // Triệt tiêu banner Google Translate bằng MutationObserver
+    const hideGoogleBanner = () => {
+      const iframes = document.querySelectorAll('iframe.skiptranslate, iframe[class*="skiptranslate"], body > iframe, .goog-te-banner-frame');
+      iframes.forEach(el => {
+        el.style.setProperty('display', 'none', 'important');
+        el.style.setProperty('visibility', 'hidden', 'important');
+        el.style.setProperty('height', '0px', 'important');
+        el.style.setProperty('width', '0px', 'important');
+        el.style.setProperty('top', '-9999px', 'important');
+      });
+      if (document.body.style.top && document.body.style.top !== '0px') {
+        document.body.style.setProperty('top', '0px', 'important');
+      }
+      if (document.body.style.position && document.body.style.position !== 'static') {
+        document.body.style.setProperty('position', 'static', 'important');
+      }
+    };
+    const gtObserver = new MutationObserver(hideGoogleBanner);
+    gtObserver.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class']
+    });
+    setInterval(hideGoogleBanner, 300);
+
+    initLanguageDropdown();
+
+    /* ════════════════════════════════════════════════════════════════
+       6. BACKGROUND MUSIC ENGINE (MIXTAPE_/intro.mp3)
+       - Tự động phát khi tải trang & khi tương tác bất kỳ đâu
+       - Tự động mở khóa âm thanh không cần bấm nút ON
+       - Nút bật/tắt trên thanh điều hướng với hiệu ứng sóng âm thanh
+       - Tự động nhường âm thanh khi phát các track mixtape khác
+    ════════════════════════════════════════════════════════════════ */
+    const bgmAudio = document.getElementById('bgmAudio');
+    const bgmBtn   = document.getElementById('bgmBtn');
+    const bgmText  = bgmBtn ? bgmBtn.querySelector('.bgm-text') : null;
+    let bgmManuallyPaused = false;
+    let audioCtx = null;
+
+    function unlockAudioContext() {
+      try {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) audioCtx = new AudioContext();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      } catch (e) {}
+    }
+
+    function setBgmUI(isPlaying) {
+      if (!bgmBtn) return;
+      if (isPlaying) {
+        bgmBtn.classList.add('playing');
+        if (bgmText) bgmText.textContent = 'MUSIC';
+        bgmBtn.setAttribute('title', 'Tạm dừng nhạc nền (P Eight - Intro)');
+      } else {
+        bgmBtn.classList.remove('playing');
+        if (bgmText) bgmText.textContent = 'MUSIC';
+        bgmBtn.setAttribute('title', 'Bật nhạc nền (P Eight - Intro)');
+      }
+    }
+
+    function playBgm() {
+      if (!bgmAudio || bgmManuallyPaused) return;
+      unlockAudioContext();
+      bgmAudio.volume = 0.8;
+      const promise = bgmAudio.play();
+      if (promise !== undefined) {
+        promise.then(() => {
+          setBgmUI(true);
+          detachFirstInteractionListeners();
+        }).catch(() => {
+          // Trình duyệt chưa cấp quyền autoplay, chờ cú chạm tự nhiên của người dùng
+        });
+      }
+    }
+
+    function onFirstInteraction() {
+      if (!bgmManuallyPaused && bgmAudio && bgmAudio.paused) {
+        playBgm();
+      }
+    }
+
+    const interactionEvents = ['pointerdown', 'touchstart', 'touchend', 'mousedown', 'click', 'keydown', 'wheel', 'scroll'];
+
+    function attachFirstInteractionListeners() {
+      interactionEvents.forEach(evt => {
+        window.addEventListener(evt, onFirstInteraction, { capture: true, passive: true });
+        document.addEventListener(evt, onFirstInteraction, { capture: true, passive: true });
+      });
+      if (document.documentElement) {
+        document.documentElement.addEventListener('pointerdown', onFirstInteraction, { capture: true });
+      }
+      if (document.body) {
+        document.body.addEventListener('pointerdown', onFirstInteraction, { capture: true });
+        document.body.addEventListener('click', onFirstInteraction, { capture: true });
+      }
+    }
+
+    function detachFirstInteractionListeners() {
+      interactionEvents.forEach(evt => {
+        window.removeEventListener(evt, onFirstInteraction, { capture: true });
+        document.removeEventListener(evt, onFirstInteraction, { capture: true });
+      });
+    }
+
+    // Tự động phát ngay lập tức khi tải trang
+    playBgm();
+    window.addEventListener('load', playBgm);
+    document.addEventListener('DOMContentLoaded', playBgm);
+    attachFirstInteractionListeners();
+
+    if (bgmAudio) {
+      bgmAudio.addEventListener('play', () => setBgmUI(true));
+      bgmAudio.addEventListener('pause', () => {
+        if (!isAnyMixPlaying()) {
+          setBgmUI(false);
+        }
+      });
+      bgmAudio.addEventListener('ended', () => {
+        if (!bgmManuallyPaused) {
+          bgmAudio.currentTime = 0;
+          playBgm();
+        }
+      });
+    }
+
+    // Toggle nhạc nền khi click vào nút BGM
+    if (bgmBtn && bgmAudio) {
+      bgmBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (bgmAudio.paused) {
+          bgmManuallyPaused = false;
+          playBgm();
+        } else {
+          bgmManuallyPaused = true;
+          bgmAudio.pause();
+          setBgmUI(false);
+        }
+      });
+    }
+
+    function isAnyMixPlaying() {
+      return Array.from(document.querySelectorAll('#mix audio')).some(a => !a.paused && !a.ended);
+    }
+
+    // Đồng bộ với các audio player ở phần #mix (tránh phát đè nhạc)
+    document.querySelectorAll('#mix audio').forEach(mixAudio => {
+      mixAudio.addEventListener('play', () => {
+        if (bgmAudio && !bgmAudio.paused) {
+          bgmAudio.pause();
+          setBgmUI(false);
+        }
+      });
+      mixAudio.addEventListener('pause', () => {
+        setTimeout(() => {
+          if (!isAnyMixPlaying() && !bgmManuallyPaused && bgmAudio && bgmAudio.paused) {
+            playBgm();
+          }
+        }, 300);
+      });
+      mixAudio.addEventListener('ended', () => {
+        if (!isAnyMixPlaying() && !bgmManuallyPaused && bgmAudio && bgmAudio.paused) {
+          playBgm();
+        }
+      });
+    });
+  </script>
+  <!-- Google Translate API -->
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
+</body>
+</html>
